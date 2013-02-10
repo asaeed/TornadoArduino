@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.552, user-scalable=no"/>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      canvas {
+        border: 1px solid #9C9898;
+      }
+    </style>
+    <script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.2.0.js"></script>
+    <script>
+      
+      var socket = new WebSocket("ws://raspberrypi:8080/ws");
+
+      socket.onopen = function(){  
+        console.log("connected"); 
+      }; 
+      
+      socket.onmessage = function (message) {
+        console.log("in: " + message.data);
+      };
+
+      socket.onclose = function(){
+        console.log("disconnected"); 
+      };
+
+      sendMessage = function(message) {
+        socket.send(message);
+      };
+
+      var hueValue = 0;
+
+      window.onload = function() {
+        var stage = new Kinetic.Stage({
+          container: "container",
+          width: 610,
+          height: 400
+        });
+
+        var layer  = new Kinetic.Layer();
+
+        var circle = new Kinetic.Circle({
+          x: 100,
+          y: 100,
+          radius: 10,
+          fill: "red",
+          stroke: "black",
+          strokeWidth: 4,
+          draggable: true
+        });
+
+        circle.on("mousedown", function() {
+          hueValue = hueValue + 20;
+          console.log('sending: ' + hueValue);
+          sendMessage("24," + hueValue + ",1");
+        });
+
+        layer.add(circle);
+
+        stage.add(layer);
+      };
+
+    </script>
+  </head>
+  <body onmousedown="return false;">
+    <div id="container"></div>
+  </body>
+</html>
