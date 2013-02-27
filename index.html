@@ -15,7 +15,7 @@
       }; 
       
       socket.onmessage = function (message) {
-        console.log("in: " + message.data);
+        console.log("receiving: " + message.data);
       };
 
       socket.onclose = function(){

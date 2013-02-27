@@ -27,9 +27,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         print 'tornado received from client: %s' % message
-        #self.write_message('message received %s' % message)
-        for c in clients:
-            c.write_message('client received from tornado: %s' % message)
+        self.write_message('got it!')
         q = self.application.settings.get('queue')
         q.put(message)
 
@@ -66,6 +64,8 @@ def main():
         if not resultQ.empty():
             result = resultQ.get()
             print "tornado received from arduino: " + result
+            for c in clients:
+                c.write_message(message)
         
     mainLoop = tornado.ioloop.IOLoop.instance()
     scheduler = tornado.ioloop.PeriodicCallback(checkResults, 10, io_loop = mainLoop)
