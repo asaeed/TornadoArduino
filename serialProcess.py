@@ -2,7 +2,7 @@ import serial
 import time
 import multiprocessing
 
-class Arduino(multiprocessing.Process):
+class SerialProcess(multiprocessing.Process):
 
     def __init__(self, taskQ, resultQ):
         multiprocessing.Process.__init__(self)
