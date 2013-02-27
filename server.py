@@ -65,7 +65,7 @@ def main():
             result = resultQ.get()
             print "tornado received from arduino: " + result
             for c in clients:
-                c.write_message(message)
+                c.write_message(result)
         
     mainLoop = tornado.ioloop.IOLoop.instance()
     scheduler = tornado.ioloop.PeriodicCallback(checkResults, 10, io_loop = mainLoop)
