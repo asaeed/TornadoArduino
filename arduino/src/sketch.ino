@@ -27,7 +27,10 @@ void handleSerial() {
     } else {
       // reached end of line
       msgArray[msgPos] = 0;
-      Serial.print("message: "); Serial.println(msgArray);
+      
+      // here the message is processed
+      // for now just send it back over serial
+      Serial.println(msgArray);
     
       // reset byte array
       for (int c = 0; c < msgSize; c++) 
