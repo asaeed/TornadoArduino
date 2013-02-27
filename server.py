@@ -24,7 +24,6 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print 'new connection'
         clients.append(self)
         self.write_message("connected")
-        #self.ard = arduino.Arduino()
 
     def on_message(self, message):
         print 'tornado received from client: %s' % message
@@ -33,7 +32,6 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             c.write_message('client received from tornado: %s' % message)
         q = self.application.settings.get('queue')
         q.put(message)
-        #self.arduino.sendData()
 
     def on_close(self):
         print 'connection closed'
@@ -65,7 +63,6 @@ def main():
     #tornado.ioloop.IOLoop.instance().start()
     
     def checkResults():
-        #print "one 2nd..."
         if not resultQ.empty():
             result = resultQ.get()
             print "tornado received from arduino: " + result

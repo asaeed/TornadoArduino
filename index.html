@@ -1,15 +1,9 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=0.552, user-scalable=no"/>
     <style>
-      body {
-        margin: 0px;
-        padding: 0px;
-      }
-      canvas {
-        border: 1px solid #9C9898;
-      }
+      body { margin: 0px; padding: 0px; }
+      canvas { border: 1px solid #9C9898; }
     </style>
     <script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.2.0.js"></script>
     <script>
@@ -32,7 +26,7 @@
         socket.send(message);
       };
 
-      var hueValue = 0;
+      var value = 0;
 
       window.onload = function() {
         var stage = new Kinetic.Stage({
@@ -54,19 +48,18 @@
         });
 
         circle.on("mousedown", function() {
-          hueValue = hueValue + 20;
-          console.log('sending: ' + hueValue);
-          sendMessage("24," + hueValue + ",1");
+          value = value + 20;
+          console.log('sending: ' + value);
+          sendMessage("24," + value + ",1");
         });
 
         layer.add(circle);
-
         stage.add(layer);
       };
 
     </script>
   </head>
-  <body onmousedown="return false;">
+  <body>
     <div id="container"></div>
   </body>
 </html>

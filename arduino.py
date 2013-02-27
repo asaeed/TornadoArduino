@@ -24,16 +24,16 @@ class Arduino(multiprocessing.Process):
     	self.sp.flushInput()
 
         while True:
-            #print "START RUN"
+
+            # look for incoming tornado requests
             if not self.taskQ.empty():
                 task = self.taskQ.get()
                 print "arduino received from tornado: " + task
                 result = task
                 self.resultQ.put(result)
-            #time.sleep(2)
-            #print "END RUN"
+                #TODO: send message to arduino here.
 
-            #here also look at incoming serial data..
+            # look for incoming serial data
             if (self.sp.inWaiting() > 0):
             	sensorData = self.sp.readline().replace("\n", "")
             	self.resultQ.put(sensorData)
