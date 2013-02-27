@@ -39,7 +39,5 @@ void handleSerial() {
       msgPos = 0;
       digitalWrite(LED_PIN, LOW);
     }
-  } else {
-    
   }
 }
