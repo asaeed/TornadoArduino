@@ -46,7 +46,7 @@ def main():
     sp.daemon = True
     sp.start()
 
-    time.delay(100)
+    time.sleep(2)
     taskQ.put("first task")
 
     tornado.options.parse_command_line()
