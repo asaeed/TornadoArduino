@@ -30,8 +30,8 @@ class Arduino(multiprocessing.Process):
                 task = self.taskQ.get()
                 print "arduino received from tornado: " + task
                 result = task
-                self.resultQ.put(result)
-                #TODO: send message to arduino here.
+                #self.resultQ.put(result)
+                self.sp.write(result);
 
             # look for incoming serial data
             if (self.sp.inWaiting() > 0):
