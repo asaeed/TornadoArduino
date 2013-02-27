@@ -11,7 +11,7 @@ class SerialProcess(multiprocessing.Process):
         self.usbPort = '/dev/ttyACM0'
         self.sp = serial.Serial(self.usbPort, 115200, timeout=1)
 
-    def closeArduino(self):
+    def close(self):
         self.sp.close()
 
     def sendData(self, data):
